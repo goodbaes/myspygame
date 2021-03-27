@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
 import 'package:spyprj1/data/lists.dart';
+import 'package:spyprj1/getx/globalvar.dart';
 import 'package:spyprj1/ui/myhomepage.dart';
 import 'package:spyprj1/ui/theme/customtheme.dart';
 
 void main() async {
   Get.put(LocationsList());
+  Get.put(GlobalVariable());
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   runApp(
