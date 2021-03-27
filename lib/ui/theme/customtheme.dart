@@ -18,17 +18,24 @@ class MyTheam {
           onError: Colors.yellowAccent,
           brightness: Brightness.light),
       appBarTheme: AppBarTheme(
-          backgroundColor: Colors.white,
-          actionsIconTheme: IconThemeData(color: Colors.black)),
+        shadowColor: Colors.white,
+        backgroundColor: Colors.white,
+        actionsIconTheme: IconThemeData(color: Colors.black87),
+      ),
+      iconTheme: IconThemeData(color: Colors.black87),
       inputDecorationTheme: InputDecorationTheme(),
-      textTheme: TextTheme(bodyText1: TextStyle(color: Colors.blueGrey)),
+      textTheme: TextTheme(
+        button: TextStyle(color: Colors.black87),
+        bodyText2: TextStyle(color: Colors.black87),
+        bodyText1: TextStyle(color: Colors.black87),
+      ),
       canvasColor: Colors.white,
       brightness: Brightness.light,
       accentColor: Colors.amber,
       accentIconTheme: IconThemeData(color: Colors.black),
       buttonColor: Colors.amber,
       cardColor: Colors.amber,
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.white,
     );
   }
 

@@ -3,8 +3,8 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:spyprj1/data/consts/const.dart';
-import 'package:spyprj1/data/lists.dart';
 import 'package:spyprj1/data/storeoutput.dart';
+import 'package:spyprj1/getx/globalvar.dart';
 import 'package:spyprj1/ui/myhomepage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:spyprj1/ui/timerpage.dart';
@@ -27,7 +27,7 @@ class _MyShowCardPageState extends State<MyShowCardPage>
   List<Player> playerList;
   @override
   void initState() {
-    // LocationsList ll = Get.find();
+    print(widget.location);
     List pList = List<Player>.generate(
         widget.p, (index) => PlayerFromlist(widget.location));
     List sList =
@@ -196,8 +196,9 @@ class Carousel extends StatelessWidget {
                                 }
                                 if (a == playerList.length - 1 &&
                                     snapshot.data == i) {
-                                  Get.off(() => CountDownTimer());
+                                  Get.offAll(() => CountDownTimer());
                                   streamController.close();
+                                  Get.find<GlobalVariable>().locationClear();
                                 }
                               },
                               child: MyTextH1(

@@ -31,7 +31,7 @@ class _CountDownTimerState extends State<CountDownTimer> {
                 child: GetBuilder<GlobalVariable>(
                   init: GlobalVariable(),
                   builder: (global) {
-                    return CircularTimer(time: global.timer.value.toInt());
+                    return CircularTimer(time: global.timer.toInt());
                   },
                 ),
               ),
@@ -40,16 +40,21 @@ class _CountDownTimerState extends State<CountDownTimer> {
               ),
               Positioned(
                 bottom: 0,
-                child: Card(
-                  child: Container(
-                    width: SizeConfig.blockSizeHorizontal * 100,
-                    child: TextButton(
-                      onPressed: () {
-                        Get.offAll(() => MyHomePage());
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: MyTextH1(text: "restartGame"),
+                child: Container(
+                  width: SizeConfig.blockSizeHorizontal * 100,
+                  color: Colors.amber,
+                  child: Card(
+                    elevation: 0,
+                    child: Container(
+                      width: SizeConfig.blockSizeHorizontal * 100,
+                      child: TextButton(
+                        onPressed: () {
+                          Get.offAll(() => MyHomePage());
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: MyTextH1(text: "restartGame"),
+                        ),
                       ),
                     ),
                   ),
@@ -77,11 +82,11 @@ class CircularTimer extends StatelessWidget {
       controller: CountDownController(),
       width: MediaQuery.of(context).size.width / 1.5,
       height: MediaQuery.of(context).size.height / 1.5,
-      ringColor: Colors.grey[300],
+      ringColor: Theme.of(context).backgroundColor,
       ringGradient: null,
-      fillColor: Colors.amber[300],
+      fillColor: Theme.of(context).indicatorColor,
       fillGradient: null,
-      backgroundColor: Colors.orangeAccent[200],
+      backgroundColor: Theme.of(context).accentColor,
       backgroundGradient: null,
       strokeWidth: 20.0,
       strokeCap: StrokeCap.round,

@@ -1,37 +1,48 @@
 import 'package:get/get.dart';
+import 'package:spyprj1/data/lists.dart';
 
 class GlobalVariable extends GetxController {
-  var spys = 1.obs;
-  var players = 1.obs;
-  var timer = 60.obs;
+  int spys = 1;
+  int players = 1;
+  int timer = 60;
+  String location;
+  LocationsList locationsList = LocationsList();
+  locationClear() {
+    location = "";
+  }
+
+  fromMyField(String myLoc) {
+    location = myLoc;
+    update();
+  }
+
   incrementSpys() {
-    spys.value++;
+    spys++;
     update();
   }
 
   decrementSpys() {
-    spys.value > 0 ? spys.value-- : spys.value;
+    spys > 0 ? spys-- : spys = spys;
     update();
   }
 
   incrementPlayer() {
-    players.value++;
-    update();
+    players++;
     update();
   }
 
   decrementTimer() {
-    timer.value > 0 ? timer.value = timer.value - 60 : timer.value;
+    timer > 0 ? timer = timer - 60 : timer = timer;
     update();
   }
 
   decrementPlayer() {
-    players.value > 0 ? players.value-- : players.value;
+    players > 0 ? players-- : players = players;
     update();
   }
 
   incrementTimer() {
-    timer.value = timer.value + 60;
+    timer = timer + 60;
     update();
   }
 }
