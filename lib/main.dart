@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
+import 'package:spyprj1/data/consts/const.dart';
 import 'package:spyprj1/data/lists.dart';
 import 'package:spyprj1/getx/globalvar.dart';
 import 'package:spyprj1/ui/myhomepage.dart';
@@ -16,8 +17,8 @@ void main() async {
     EasyLocalization(
         child: MyApp(),
         supportedLocales: [
+          Locale('en', 'US'),
           Locale('ru'),
-          //  Locale('en', 'US')
         ],
         path: 'assets/lang'),
   );

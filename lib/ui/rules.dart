@@ -32,32 +32,34 @@ class RuleScreen extends StatelessWidget {
                 fit: BoxFit.cover,
                 image: AssetImage("assets/graphic/main.png"),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  MyTextH1white(
-                    text: "rule",
-                  ),
-                  MyTextH2white(
-                    text: "ruleOverview",
-                  ),
-                  MyTextH2white(
-                    text: "ruleResidentGaal",
-                  ),
-                  MyTextH2white(
-                    text: "ruleSpyGoal",
-                  ),
-                  MyTextH2white(
-                    text: "ruleRound",
-                  ),
-                  MyTextH2white(
-                    text: "ruleWhenGameEnds",
-                  ),
-                  MyTextH2white(
-                    text: "ruleYourGame",
-                  ),
-                ],
+              SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    MyTextH1white(
+                      text: "rule",
+                    ),
+                    MyTextH2white(
+                      text: "ruleOverview",
+                    ),
+                    MyTextH2white(
+                      text: "ruleResidentGaal",
+                    ),
+                    MyTextH2white(
+                      text: "ruleSpyGoal",
+                    ),
+                    MyTextH2white(
+                      text: "ruleRound",
+                    ),
+                    MyTextH2white(
+                      text: "ruleWhenGameEnds",
+                    ),
+                    MyTextH2white(
+                      text: "ruleYourGame",
+                    ),
+                  ],
+                ),
               )
               // StartButton(
               //   onTapVoid: () {

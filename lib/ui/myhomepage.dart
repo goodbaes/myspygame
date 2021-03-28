@@ -405,7 +405,26 @@ class MyTextH2white extends StatelessWidget {
         child: Text(localization.tr(text),
             textAlign: TextAlign.left,
             style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical * 2,
+              fontSize: SizeConfig.blockSizeHorizontal * 4,
+              color: Colors.white,
+            )),
+      ),
+    );
+  }
+}
+
+class MyTextH2whiteCenter extends StatelessWidget {
+  const MyTextH2whiteCenter({this.text});
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        child: Text(localization.tr(text),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical * 3,
               color: Colors.white,
             )),
       ),

@@ -29,41 +29,42 @@ class _CountDownTimerState extends State<CountDownTimer> {
                     colorBlendMode: BlendMode.hardLight,
                     fit: BoxFit.cover,
                     image: AssetImage(kspyImage)),
-                Padding(
-                  padding: EdgeInsets.all(SizeConfig.blockSizeHorizontal * 5),
-                  child: GetBuilder<GlobalVariable>(
-                    init: GlobalVariable(),
-                    builder: (global) {
-                      return CircularTimer(time: global.timer.toInt());
-                    },
-                  ),
-                ),
-                Positioned(
-                    top: 20,
-                    child: MyTextH2(
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    MyTextH2whiteCenter(
                       text: "timerControl",
-                    )),
-                Positioned(
-                  bottom: 0,
-                  child: Container(
-                    width: SizeConfig.blockSizeHorizontal * 100,
-                    color: Colors.amber,
-                    child: Card(
-                      elevation: 0,
-                      child: Container(
-                        width: SizeConfig.blockSizeHorizontal * 100,
-                        child: TextButton(
-                          onPressed: () {
-                            Get.offAll(() => StartScreen());
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: MyTextH1(text: "restartGame"),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.all(SizeConfig.blockSizeHorizontal * 5),
+                      child: GetBuilder<GlobalVariable>(
+                        init: GlobalVariable(),
+                        builder: (global) {
+                          return CircularTimer(time: global.timer.toInt());
+                        },
+                      ),
+                    ),
+                    Container(
+                      width: SizeConfig.blockSizeHorizontal * 100,
+                      color: Colors.amber,
+                      child: Card(
+                        elevation: 0,
+                        child: Container(
+                          width: SizeConfig.blockSizeHorizontal * 100,
+                          child: TextButton(
+                            onPressed: () {
+                              Get.offAll(() => StartScreen());
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: MyTextH1(text: "restartGame"),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),
@@ -94,8 +95,8 @@ class CircularTimer extends StatelessWidget {
         duration: time,
         initialDuration: 0,
         controller: controller,
-        width: MediaQuery.of(context).size.width / 1.5,
-        height: MediaQuery.of(context).size.height / 1.5,
+        width: SizeConfig.blockSizeHorizontal * 50,
+        height: SizeConfig.blockSizeVertical * 50,
         ringColor: Theme.of(context).backgroundColor,
         ringGradient: null,
         fillColor: Theme.of(context).indicatorColor,
@@ -105,7 +106,7 @@ class CircularTimer extends StatelessWidget {
         strokeWidth: 20.0,
         strokeCap: StrokeCap.round,
         textStyle: TextStyle(
-            fontSize: SizeConfig.blockSizeVertical * 10,
+            fontSize: SizeConfig.blockSizeVertical * 5,
             color: Colors.white,
             fontWeight: FontWeight.bold),
         textFormat: CountdownTextFormat.MM_SS,

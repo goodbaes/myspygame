@@ -197,7 +197,7 @@ class Carousel extends StatelessWidget {
                                 }
                                 if (a == playerList.length - 1 &&
                                     snapshot.data == i) {
-                                  Get.offAll(() => CountDownTimer());
+                                  Get.to(() => CountDownTimer());
                                   streamController.close();
                                   Get.find<GlobalVariable>().locationClear();
                                 }

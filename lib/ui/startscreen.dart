@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:spyprj1/data/enums.dart';
 import 'package:spyprj1/ui/myhomepage.dart';
@@ -13,12 +12,14 @@ class StartScreen extends StatelessWidget {
         child: Scaffold(
       body: Center(
         child: Stack(
-          alignment: AlignmentDirectional.center,
+          alignment: AlignmentDirectional.topCenter,
           fit: StackFit.expand,
           children: [
-            Image(
-              fit: BoxFit.cover,
-              image: AssetImage("assets/graphic/main.png"),
+            Positioned(
+              child: Image(
+                fit: BoxFit.cover,
+                image: AssetImage("assets/graphic/main.png"),
+              ),
             ),
             Positioned(
               bottom: 20,

@@ -31,6 +31,7 @@ dependencies:
   equatable: ^2.0.0
   flutter_bloc: ^7.0.0
   get: ^3.26.0
+  transparent_image: ^2.0.0
 
 dev_dependencies:
   flutter_test:

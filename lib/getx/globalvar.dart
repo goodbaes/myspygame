@@ -22,7 +22,7 @@ class GlobalVariable extends GetxController {
   }
 
   decrementSpys() {
-    spys > 0 ? spys-- : spys = spys;
+    spys > 1 ? spys-- : spys = spys;
     update();
   }
 
@@ -32,12 +32,12 @@ class GlobalVariable extends GetxController {
   }
 
   decrementTimer() {
-    timer > 0 ? timer = timer - 60 : timer = timer;
+    timer > 60 ? timer = timer - 60 : timer = timer;
     update();
   }
 
   decrementPlayer() {
-    players > 0 ? players-- : players = players;
+    players > 1 ? players-- : players = players;
     update();
   }
 
