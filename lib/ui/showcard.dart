@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:spyprj1/data/consts/const.dart';
 import 'package:spyprj1/data/enums.dart';
-import 'package:spyprj1/data/enums.dart';
 import 'package:spyprj1/data/storeoutput.dart';
 import 'package:spyprj1/getx/globalvar.dart';
 import 'package:spyprj1/ui/myhomepage.dart';
