@@ -71,6 +71,7 @@ class Carousel extends StatelessWidget {
   Widget build(BuildContext context) {
     return CarouselSlider(
       options: CarouselOptions(
+        scrollPhysics: NeverScrollableScrollPhysics(),
         height: SizeConfig.blockSizeVertical * 90,
         aspectRatio: 16 / 9,
         viewportFraction: 0.8,
