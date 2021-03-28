@@ -3,6 +3,8 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:spyprj1/data/consts/const.dart';
+import 'package:spyprj1/data/enums.dart';
+import 'package:spyprj1/data/enums.dart';
 import 'package:spyprj1/data/storeoutput.dart';
 import 'package:spyprj1/getx/globalvar.dart';
 import 'package:spyprj1/ui/myhomepage.dart';
@@ -10,7 +12,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:spyprj1/ui/timerpage.dart';
 
 class MyShowCardPage extends StatefulWidget {
-  MyShowCardPage({this.p, this.s, this.location});
+  MyShowCardPage({this.p, this.s, this.location, this.type});
+  final GameType type;
   final int p;
   final int s;
   final String location;
@@ -34,6 +37,12 @@ class _MyShowCardPageState extends State<MyShowCardPage>
         List<Player>.generate(widget.s, (index) => PlayerFromlistSpy());
     playerList = pList + sList;
     playerList.shuffle();
+    if (widget.type == GameType.playerInput) {
+      playerList.insert(
+        0,
+        PlayerFromlist(widget.location),
+      );
+    }
     super.initState();
   }
 

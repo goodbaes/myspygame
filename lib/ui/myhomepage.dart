@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:spyprj1/data/consts/const.dart';
 import 'package:easy_localization/easy_localization.dart' as localization;
 import 'package:spyprj1/data/enums.dart';
+import 'package:spyprj1/data/storeoutput.dart';
 import 'package:spyprj1/getx/globalvar.dart';
 import 'package:spyprj1/ui/showcard.dart';
 import 'package:spyprj1/ui/startscreen.dart';
+import 'package:spyprj1/ui/widgets/playercard.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({this.type});
@@ -126,12 +128,14 @@ class StartWithRandomLocationButton extends StatelessWidget {
     Key key,
   }) : super(key: key);
   final GlobalVariable value;
+  final GameType type = GameType.playerInput;
   @override
   Widget build(BuildContext context) {
     return StartButton(
       onTapVoid: () {
         String loc = value.locationsList.getLocation();
         Get.to(() => MyShowCardPage(
+              type: type,
               location: loc,
               s: value.spys.toInt(),
               p: value.players.toInt(),
@@ -148,6 +152,8 @@ class StartWithYourLocationButton extends StatelessWidget {
     Key key,
   }) : super(key: key);
   final GlobalVariable value;
+  final GameType type = GameType.playerInput;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -188,6 +194,7 @@ class StartWithYourLocationButton extends StatelessWidget {
               print(value.location);
               if (value.location != "" && value.location != null) {
                 Get.to(() => MyShowCardPage(
+                      type: type,
                       location: value.location,
                       s: (value.spys.toInt()),
                       p: value.players.toInt() - 1,
@@ -223,88 +230,6 @@ class StartButton extends StatelessWidget {
               child: MyTextH1(
                 text: text,
               ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class PlayerCard extends StatelessWidget {
-  const PlayerCard(
-      {Key key,
-      this.text,
-      this.imgUrl,
-      this.count,
-      this.minusFunc,
-      this.plusFunc})
-      : super(key: key);
-  final String text;
-  final String imgUrl;
-  final Function minusFunc;
-  final Function plusFunc;
-  final String count;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Card(
-        elevation: 5,
-        child: Container(
-          height: SizeConfig.blockSizeVertical * 25,
-          width: SizeConfig.blockSizeHorizontal * 80,
-          child: Container(
-            child: Stack(
-              children: [
-                Positioned(
-                  bottom: -SizeConfig.blockSizeVertical * 5,
-                  left: -SizeConfig.blockSizeVertical * 5,
-                  child: CircleAvatar(
-                    foregroundImage: AssetImage(imgUrl),
-                    radius: SizeConfig.blockSizeVertical * 15,
-                    // minRadius: 100,
-                    // maxRadius: 100,
-                  ),
-                ),
-                Positioned(
-                    right: 0,
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(0, 0, 8, 0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: MyTextH1(
-                              text: text,
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Colors.amber,
-                                borderRadius:
-                                    BorderRadius.circular(kborderRadiusCard)),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                IconForCount(
-                                  icon: Icons.keyboard_arrow_up,
-                                  myFunc: plusFunc,
-                                ),
-                                MyTextH1text(text: count),
-                                IconForCount(
-                                  myFunc: minusFunc,
-                                  icon: Icons.keyboard_arrow_down,
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ))
-              ],
             ),
           ),
         ),

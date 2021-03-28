@@ -25,10 +25,11 @@ class _CountDownTimerState extends State<CountDownTimer> {
               alignment: Alignment.topCenter,
               children: [
                 Image(
-                    color: Colors.black54,
-                    colorBlendMode: BlendMode.hardLight,
-                    fit: BoxFit.cover,
-                    image: AssetImage(kspyImage)),
+                  color: Color.fromARGB(200, 0, 0, 0),
+                  colorBlendMode: BlendMode.darken,
+                  fit: BoxFit.cover,
+                  image: AssetImage(kspyImage),
+                ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

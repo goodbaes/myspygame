@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:spyprj1/data/consts/const.dart';
 import 'package:spyprj1/data/enums.dart';
 import 'package:spyprj1/ui/myhomepage.dart';
 import 'package:spyprj1/ui/startscreen.dart';
@@ -30,7 +31,7 @@ class RuleScreen extends StatelessWidget {
                 color: Color.fromARGB(200, 0, 0, 0),
                 colorBlendMode: BlendMode.darken,
                 fit: BoxFit.cover,
-                image: AssetImage("assets/graphic/main.png"),
+                image: AssetImage(kmainImage),
               ),
               SingleChildScrollView(
                 child: Column(

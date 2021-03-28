@@ -8,8 +8,7 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       body: Center(
         child: Stack(
           alignment: AlignmentDirectional.topCenter,
@@ -60,6 +59,6 @@ class StartScreen extends StatelessWidget {
           ],
         ),
       ),
-    ));
+    );
   }
 }
