@@ -23,7 +23,8 @@ class MyTheam {
         actionsIconTheme: IconThemeData(color: Colors.black87),
       ),
       iconTheme: IconThemeData(color: Colors.black87),
-      inputDecorationTheme: InputDecorationTheme(),
+      inputDecorationTheme:
+          InputDecorationTheme(filled: true, fillColor: Colors.amber[200]),
       textTheme: TextTheme(
         button: TextStyle(color: Colors.black87),
         bodyText2: TextStyle(color: Colors.black87),

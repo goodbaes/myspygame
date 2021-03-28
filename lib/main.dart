@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:spyprj1/data/lists.dart';
 import 'package:spyprj1/getx/globalvar.dart';
 import 'package:spyprj1/ui/myhomepage.dart';
+import 'package:spyprj1/ui/startscreen.dart';
 import 'package:spyprj1/ui/theme/customtheme.dart';
 
 void main() async {
@@ -13,7 +14,12 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   runApp(
     EasyLocalization(
-        child: MyApp(), supportedLocales: [Locale('ru')], path: 'assets/lang'),
+        child: MyApp(),
+        supportedLocales: [
+          Locale('ru'),
+          //  Locale('en', 'US')
+        ],
+        path: 'assets/lang'),
   );
 }
 
@@ -27,7 +33,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: context.supportedLocales,
         locale: context.locale,
         theme: MyTheam.lightTheme,
-        home: MyHomePage(),
+        home: StartScreen(),
         //  MyHomePage(),
       ),
     );
