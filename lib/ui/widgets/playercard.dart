@@ -47,7 +47,7 @@ class PlayerCard extends StatelessWidget {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(4.0),
-                            child: MyTextH1(
+                            child: MyTextMain(
                               text: text,
                             ),
                           ),

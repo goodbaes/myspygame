@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:spyprj1/data/consts/const.dart';
 import 'package:easy_localization/easy_localization.dart' as localization;
 import 'package:spyprj1/data/enums.dart';
-import 'package:spyprj1/data/storeoutput.dart';
 import 'package:spyprj1/getx/globalvar.dart';
 import 'package:spyprj1/ui/showcard.dart';
 import 'package:spyprj1/ui/startscreen.dart';
@@ -103,9 +102,6 @@ class MyHomePage extends StatelessWidget {
                   Visibility(
                       visible: (type == GameType.random),
                       child: StartWithRandomLocationButton(value: value)),
-                  SizedBox(
-                    height: SizeConfig.blockSizeVertical * 2,
-                  ),
                   Visibility(
                       visible: (type == GameType.playerInput),
                       child: StartWithYourLocationButton(value: value)),
