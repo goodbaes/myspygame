@@ -1,7 +1,5 @@
 import 'dart:math';
 
-import 'package:get/get.dart';
-
 class LocationsList {
   List list = [
     "SwimPool",
@@ -16,7 +14,16 @@ class LocationsList {
     "Hollywood",
     "Kitchen",
     "Wood",
-    "MarianaTrench"
+    "MarianaTrench",
+    //
+    "Stadium",
+    "Mine",
+    "Museum",
+    "Library",
+    "Wedding",
+    "Underground",
+    "Cemetery",
+    "Prison",
   ];
   List newList = [];
   var rng = Random();

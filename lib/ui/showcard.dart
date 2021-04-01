@@ -11,11 +11,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:spyprj1/ui/timerpage.dart';
 
 class MyShowCardPage extends StatefulWidget {
-  MyShowCardPage({this.p, this.s, this.location, this.type});
+  MyShowCardPage({this.type});
   final GameType type;
-  final int p;
-  final int s;
-  final String location;
 
   @override
   _MyShowCardPageState createState() => _MyShowCardPageState();
@@ -29,19 +26,9 @@ class _MyShowCardPageState extends State<MyShowCardPage>
   List<Player> playerList;
   @override
   void initState() {
-    print(widget.location);
-    List pList = List<Player>.generate(
-        widget.p, (index) => PlayerFromlist(widget.location));
-    List sList =
-        List<Player>.generate(widget.s, (index) => PlayerFromlistSpy());
-    playerList = pList + sList;
-    playerList.shuffle();
-    if (widget.type == GameType.playerInput) {
-      playerList.insert(
-        0,
-        PlayerFromlist(widget.location),
-      );
-    }
+    GlobalVariable global = Get.find();
+    playerList = global.playerList;
+
     super.initState();
   }
 
@@ -200,8 +187,9 @@ class Carousel extends StatelessWidget {
                                 if (snapshot.data == i) {
                                   streamController.add(player);
                                   controller.nextPage(
-                                      curve: Curves.easeInSine,
-                                      duration: Duration(milliseconds: 300));
+                                      // curve: Curves.easeInSine,
+                                      // duration: Duration(milliseconds: 300)
+                                      );
                                 }
                                 if (a == playerList.length - 1 &&
                                     snapshot.data == i) {

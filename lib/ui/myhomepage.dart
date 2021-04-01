@@ -6,6 +6,7 @@ import 'package:spyprj1/data/enums.dart';
 import 'package:spyprj1/getx/globalvar.dart';
 import 'package:spyprj1/ui/showcard.dart';
 import 'package:spyprj1/ui/startscreen.dart';
+import 'package:spyprj1/ui/widgets/buttons.dart';
 import 'package:spyprj1/ui/widgets/playercard.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -129,78 +130,11 @@ class StartWithRandomLocationButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return StartButton(
       onTapVoid: () {
-        String loc = value.locationsList.getLocation();
-        Get.to(() => MyShowCardPage(
-              type: type,
-              location: loc,
-              s: value.spys.toInt(),
-              p: value.players.toInt(),
-            ));
+        GlobalVariable _g = Get.find();
+        _g.getPlayerListRandom();
+        Get.to(() => MyShowCardPage());
       },
       text: "start",
-    );
-  }
-}
-
-class StartWithYourLocationButton extends StatelessWidget {
-  const StartWithYourLocationButton({
-    this.value,
-    Key key,
-  }) : super(key: key);
-  final GlobalVariable value;
-  final GameType type = GameType.playerInput;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: SizeConfig.blockSizeHorizontal * 80,
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: Colors.amber,
-      ),
-      child: Column(
-        children: [
-          Container(
-            child: TextField(
-              minLines: 1,
-              decoration: InputDecoration(
-                hintStyle:
-                    TextStyle(fontSize: SizeConfig.blockSizeHorizontal * 4),
-                hintText: localization.tr("yourLocation"),
-                suffixIcon: Icon(
-                  Icons.location_city,
-                ),
-              ),
-              onChanged: (i) {
-                value.fromMyField(i);
-              },
-            ),
-          ),
-          StartButton(
-            onTapVoid: () {
-              if (value.location == "" || value.location == null) {
-                Get.snackbar(
-                  "No Location",
-                  localization.tr("youShouldInputYourLocation"),
-                  duration: Duration(seconds: 2),
-                  // backgroundColor: Colors.amber[300],
-                );
-              }
-              print(value.location);
-              if (value.location != "" && value.location != null) {
-                Get.to(() => MyShowCardPage(
-                      type: type,
-                      location: value.location,
-                      s: (value.spys.toInt()),
-                      p: value.players.toInt() - 1,
-                    ));
-              }
-            },
-            text: "start",
-          ),
-        ],
-      ),
     );
   }
 }

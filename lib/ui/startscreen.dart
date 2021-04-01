@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:spyprj1/data/consts/const.dart';
 import 'package:spyprj1/data/enums.dart';
 import 'package:spyprj1/ui/myhomepage.dart';
 import 'package:spyprj1/ui/rules.dart';
@@ -17,7 +18,7 @@ class StartScreen extends StatelessWidget {
             Positioned(
               child: Image(
                 fit: BoxFit.cover,
-                image: AssetImage("assets/graphic/main.png"),
+                image: AssetImage(kmainImage),
               ),
             ),
             Positioned(

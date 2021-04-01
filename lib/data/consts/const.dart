@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // const kspyImage = 'assets/graphic/spSpy.jpg';
 // const kplayerImage = 'assets/graphic/spCitizen.jpg';

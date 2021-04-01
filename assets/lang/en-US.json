@@ -1,6 +1,6 @@
 {   "ruleRound": "During the first round after gaining a status, the players take turns saying one word related to the location. After that, the participants ask each other questions to identify the spy.",
     "ruleWhenGameEnds": "The game ends when the timer expires, all spies are identified, or the spy determined the name of the location and said it out loud.",
-    "ruleYourGame": "In 'Your location' mode, the player who wrote the location automatically gets the 'Resident' status.",
+    "ruleYourGame": "In 'Your location' mode, the first card automatically gets the 'Resident' status.",
     "ruleOverview": "In each round, players find themselves in some location. Each player has a different status. Most of the participants get the 'Resident' status and know the name of the location. One or more players receive the 'Spy' status. Spies don't know where they are. The task of spies is to make the rest of the players talk, determine the location and not get exposed. Non-spy players, in turn, try to make it clear to allies that they knows where they are, and therefore don't have a 'Spy' status.",
     "ruleSpyGoal": "The goal of spies is not to reveal themselves until the end of the round, or to determine the location everyone is in.",
     "ruleResidentGaal": "Residents' goal is to unanimously identify at least one of the spies and therefore expose them.",
@@ -40,5 +40,13 @@
      "Hollywood": "Hollywood",
      "Kitchen": "Kitchen",
      "Wood": "Forest",
-     "MarianaTrench": "Mariana Trench"
+     "MarianaTrench": "Mariana Trench",
+     "Stadium":   "Stadium",
+     "Mine":   "Mine",
+     "Museum":   "Museum",
+     "Library":   "Library",
+     "Wedding":   "Wedding",
+     "Underground":   "Underground",
+     "Cemetery":   "Cemetery",
+     "Prison":   "Prison"
 }

@@ -55,7 +55,7 @@ class _CountDownTimerState extends State<CountDownTimer> {
                           width: SizeConfig.blockSizeHorizontal * 100,
                           child: TextButton(
                             onPressed: () {
-                              Get.offAll(() => StartScreen());
+                              Get.off(() => StartScreen());
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),

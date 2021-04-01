@@ -1,27 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:spyprj1/data/consts/const.dart';
 import 'package:spyprj1/ui/myhomepage.dart';
-import 'package:spyprj1/ui/startscreen.dart';
 
 class RuleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return SafeArea(
-        child: Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios_sharp,
-              color: Theme.of(context).hintColor,
-            ),
-            onPressed: () {
-              Get.offAll(() => StartScreen());
-            }),
-      ),
-      body: Center(
-        child: Container(
+      child: Scaffold(
+        body: Container(
           child: Stack(
             alignment: AlignmentDirectional.center,
             fit: StackFit.expand,
@@ -70,6 +57,6 @@ class RuleScreen extends StatelessWidget {
           ),
         ),
       ),
-    ));
+    );
   }
 }
