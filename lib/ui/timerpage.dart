@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,8 +18,20 @@ class CountDownTimer extends StatefulWidget {
 }
 
 class _CountDownTimerState extends State<CountDownTimer> {
+  var timer_banner_android = 'ca-app-pub-6557746410207958/8536010385';
+  var timer_banner_ios = 'ca-app-pub-6557746410207958/2632985003';
+  @override
+  void initState() {
+    adId = Platform.isAndroid ? timer_banner_android : timer_banner_ios;
+
+    ad.load();
+    super.initState();
+  }
+
+  String adId = '';
+
   var ad = BannerAd(
-    adUnitId: 'ca-app-pub-6557746410207958/2632985003',
+    adUnitId: '',
     size: AdSize.banner,
     request: AdRequest(),
     listener: BannerAdListener(),
@@ -34,9 +48,6 @@ class _CountDownTimerState extends State<CountDownTimer> {
               fit: StackFit.expand,
               alignment: Alignment.topCenter,
               children: [
-                AdWidget(
-                  ad: ad,
-                ),
                 Image(
                   color: Color.fromARGB(200, 0, 0, 0),
                   colorBlendMode: BlendMode.darken,
@@ -46,6 +57,14 @@ class _CountDownTimerState extends State<CountDownTimer> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    Container(
+                      alignment: Alignment.center,
+                      width: ad.size.width.toDouble(),
+                      height: ad.size.height.toDouble(),
+                      child: AdWidget(
+                        ad: ad,
+                      ),
+                    ),
                     MyTextH2whiteCenter(
                       text: "timerControl",
                     ),

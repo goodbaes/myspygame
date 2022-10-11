@@ -5,11 +5,11 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:spygame/ui/startscreen.dart';
 import 'package:spygame/ui/theme/customtheme.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  MobileAds.instance.initialize();
-  EasyLocalization.ensureInitialized();
+  await MobileAds.instance.initialize();
+  await EasyLocalization.ensureInitialized();
   runApp(
     EasyLocalization(
         child: MyApp(),
