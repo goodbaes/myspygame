@@ -15,7 +15,6 @@ class LocationsList {
     "Kitchen",
     "Wood",
     "MarianaTrench",
-    //
     "Stadium",
     "Mine",
     "Museum",
@@ -27,6 +26,10 @@ class LocationsList {
   ];
   List newList = [];
   var rng = Random();
+  String getRandomLocation() {
+    int index = rng.nextInt(list.length - 1);
+    return list[index];
+  }
 
   String getLocation() {
     if (list.length == 0) {

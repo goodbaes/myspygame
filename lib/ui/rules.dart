@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:spyprj1/data/consts/const.dart';
-import 'package:spyprj1/ui/myhomepage.dart';
+import 'package:spygame/data/consts/const.dart';
+import 'package:spygame/ui/myhomepage.dart';
 
 class RuleScreen extends StatelessWidget {
   @override
@@ -8,6 +8,9 @@ class RuleScreen extends StatelessWidget {
     SizeConfig().init(context);
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: MyTextH1(text: 'rule'),
+        ),
         body: Container(
           child: Stack(
             alignment: AlignmentDirectional.center,

@@ -2,41 +2,15 @@ import 'dart:async';
 import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:spyprj1/data/consts/const.dart';
-import 'package:spyprj1/data/enums.dart';
-import 'package:spyprj1/data/storeoutput.dart';
-import 'package:spyprj1/getx/globalvar.dart';
-import 'package:spyprj1/ui/myhomepage.dart';
+import 'package:spygame/data/consts/const.dart';
+import 'package:spygame/data/storeoutput.dart';
+import 'package:spygame/ui/myhomepage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:spyprj1/ui/timerpage.dart';
 
-class MyShowCardPage extends StatefulWidget {
-  MyShowCardPage({this.type});
-  final GameType type;
+class MyShowCardPage extends StatelessWidget {
+  const MyShowCardPage(this.playerList);
 
-  @override
-  _MyShowCardPageState createState() => _MyShowCardPageState();
-}
-
-class _MyShowCardPageState extends State<MyShowCardPage>
-
-// with SingleTickerProviderStateMixin
-{
-  // LocationsList _locationsList = LocationsList();
-  List<Player> playerList;
-  @override
-  void initState() {
-    GlobalVariable global = Get.find();
-    playerList = global.playerList;
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
+  final List<Player> playerList;
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -102,7 +76,7 @@ class Carousel extends StatelessWidget {
                             height: SizeConfig.blockSizeVertical * 100,
                             margin: EdgeInsets.symmetric(horizontal: 5.0),
                             decoration: BoxDecoration(
-                                color: Theme.of(context).accentColor,
+                                color: Theme.of(context).colorScheme.secondary,
                                 borderRadius: BorderRadius.circular(30)),
                           ),
                         ),
@@ -193,9 +167,8 @@ class Carousel extends StatelessWidget {
                                 }
                                 if (a == playerList.length - 1 &&
                                     snapshot.data == i) {
-                                  Get.to(() => CountDownTimer());
+                                  Get.back(result: true);
                                   streamController.close();
-                                  Get.find<GlobalVariable>().locationClear();
                                 }
                               },
                               child: MyTextH1(

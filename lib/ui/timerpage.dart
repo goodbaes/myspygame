@@ -1,12 +1,14 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:spyprj1/data/consts/const.dart';
-import 'package:spyprj1/getx/globalvar.dart';
-import 'package:spyprj1/ui/myhomepage.dart';
-import 'package:spyprj1/ui/startscreen.dart';
+import 'package:spygame/data/consts/const.dart';
+import 'package:spygame/ui/myhomepage.dart';
 
 class CountDownTimer extends StatefulWidget {
+  CountDownTimer(this.timer);
+
+  final int timer;
+
   @override
   _CountDownTimerState createState() => _CountDownTimerState();
 }
@@ -39,11 +41,8 @@ class _CountDownTimerState extends State<CountDownTimer> {
                     Padding(
                       padding:
                           EdgeInsets.all(SizeConfig.blockSizeHorizontal * 5),
-                      child: GetBuilder<GlobalVariable>(
-                        init: GlobalVariable(),
-                        builder: (global) {
-                          return CircularTimer(time: global.timer.toInt());
-                        },
+                      child: CircularTimer(
+                        time: widget.timer * 60,
                       ),
                     ),
                     Container(
@@ -55,7 +54,7 @@ class _CountDownTimerState extends State<CountDownTimer> {
                           width: SizeConfig.blockSizeHorizontal * 100,
                           child: TextButton(
                             onPressed: () {
-                              Get.off(() => StartScreen());
+                              Get.back();
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -102,7 +101,7 @@ class CircularTimer extends StatelessWidget {
         ringGradient: null,
         fillColor: Theme.of(context).indicatorColor,
         fillGradient: null,
-        backgroundColor: Theme.of(context).accentColor,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         backgroundGradient: null,
         strokeWidth: 20.0,
         strokeCap: StrokeCap.round,

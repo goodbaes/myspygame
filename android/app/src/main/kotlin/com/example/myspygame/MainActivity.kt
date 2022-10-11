@@ -1,4 +1,4 @@
-package com.example.spyprj1
+package com.ruslan.myspygame
 
 import io.flutter.embedding.android.FlutterActivity
 

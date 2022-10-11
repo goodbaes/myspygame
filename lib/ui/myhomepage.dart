@@ -1,140 +1,221 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:spyprj1/data/consts/const.dart';
+import 'package:spygame/bloc/cubit/gametype_cubit.dart';
+import 'package:spygame/bloc/gamesettings_bloc/cubit/game_settings_cubit.dart';
+import 'package:spygame/bloc/location_name/cubit/location_cubit.dart';
+import 'package:spygame/data/consts/const.dart';
 import 'package:easy_localization/easy_localization.dart' as localization;
-import 'package:spyprj1/data/enums.dart';
-import 'package:spyprj1/getx/globalvar.dart';
-import 'package:spyprj1/ui/showcard.dart';
-import 'package:spyprj1/ui/startscreen.dart';
-import 'package:spyprj1/ui/widgets/buttons.dart';
-import 'package:spyprj1/ui/widgets/playercard.dart';
+import 'package:spygame/ui/showcard.dart';
+import 'package:spygame/ui/startscreen.dart';
+import 'package:spygame/ui/timerpage.dart';
+import 'package:spygame/ui/widgets/playercard.dart';
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage({this.type});
-  final GameType type;
+  MyHomePage();
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios_sharp,
-                color: Theme.of(context).hintColor,
-              ),
-              onPressed: () {
-                Get.offAll(() => StartScreen());
-              }),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<GameSettingsCubit>(
+          create: (_) => GameSettingsCubit(),
         ),
-        body: SingleChildScrollView(
-          child: GetBuilder<GlobalVariable>(
-            init: GlobalVariable(),
-            builder: (value) => Center(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: SizeConfig.blockSizeVertical * 2,
-                  ),
-                  PlayerCard(
-                    minusFunc: () {
-                      value.decrementPlayer();
-                    },
-                    plusFunc: () {
-                      value.incrementPlayer();
-                    },
-                    count: value.players.toString(),
-                    text: "citizen",
-                    imgUrl: kplayerImage,
-                  ),
-                  PlayerCard(
-                    count: value.spys.toString(),
-                    minusFunc: () {
-                      value.decrementSpys();
-                    },
-                    plusFunc: () {
-                      value.incrementSpys();
-                    },
-                    text: "spy",
-                    imgUrl: kspyImage,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      width: SizeConfig.blockSizeHorizontal * 95,
-                      child: Column(
-                        children: [
-                          MyTextH1(
-                            text: "gameTime",
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+        BlocProvider<GametypeCubit>(
+          create: (_) => GametypeCubit(),
+        ),
+        BlocProvider<LocationCubit>(
+          create: (_) => LocationCubit(),
+        ),
+      ],
+      child: BlocBuilder<GameSettingsCubit, GameSettingsState>(
+        builder: (context, state) {
+          return SafeArea(
+            child: Scaffold(
+              appBar: AppBar(
+                title: Icon(
+                  Icons.accessibility_rounded,
+                  color: Colors.white,
+                ),
+                backgroundColor: Theme.of(context).colorScheme.secondary,
+                leading: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios_sharp,
+                      color: Theme.of(context).hintColor,
+                    ),
+                    onPressed: () {
+                      Get.offAll(() => StartScreen());
+                    }),
+              ),
+              body: SingleChildScrollView(
+                child: Center(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      PlayerCard(
+                        minusFunc: () {
+                          context.read<GameSettingsCubit>().decrementPlayer();
+                        },
+                        plusFunc: () {
+                          context.read<GameSettingsCubit>().incrementPlayer();
+                        },
+                        count: state.players.toString(),
+                        text: "citizen",
+                        imgUrl: kplayerImage,
+                      ),
+                      PlayerCard(
+                        count: state.spys.toString(),
+                        minusFunc: () {
+                          context.read<GameSettingsCubit>().decrementSpy();
+                        },
+                        plusFunc: () {
+                          context.read<GameSettingsCubit>().incrementSpy();
+                        },
+                        text: "spy",
+                        imgUrl: kspyImage,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          width: SizeConfig.blockSizeHorizontal * 95,
+                          child: Column(
                             children: [
-                              IconForCount(
-                                myFunc: () {
-                                  value.decrementTimer();
-                                },
-                                icon: Icons.remove,
+                              MyTextH1(
+                                text: "gameTime",
                               ),
-                              TextButton(
-                                style: ButtonStyle(),
-                                onPressed: () {},
-                                child: MyTextH1text(
-                                  text:
-                                      ((value.timer ~/ 60).toInt()).toString(),
-                                ),
-                              ),
-                              GestureDetector(
-                                onLongPress: () {
-                                  value.incrementTimer();
-                                },
-                                child: IconForCount(
-                                    icon: Icons.add,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  IconForCount(
                                     myFunc: () {
-                                      value.incrementTimer();
-                                    }),
-                              )
+                                      context
+                                          .read<GameSettingsCubit>()
+                                          .decrementTime();
+                                    },
+                                    icon: Icons.remove,
+                                  ),
+                                  TextButton(
+                                    style: ButtonStyle(),
+                                    onPressed: () {},
+                                    child: MyTextH1text(
+                                      text: ((state.timer).toInt()).toString(),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onLongPress: () {
+                                      context
+                                          .read<GameSettingsCubit>()
+                                          .incrementTime();
+                                    },
+                                    child: IconForCount(
+                                        icon: Icons.add,
+                                        myFunc: () {
+                                          context
+                                              .read<GameSettingsCubit>()
+                                              .incrementTime();
+                                        }),
+                                  )
+                                ],
+                              ),
                             ],
                           ),
-                        ],
+                        ),
                       ),
-                    ),
+                      BlocBuilder<GametypeCubit, GametypeState>(
+                          builder: (context, GametypeState state) {
+                        return BlocBuilder<LocationCubit, LocationState>(
+                          builder: (context, locationState) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    MyTextH1(
+                                      text: 'yourLocation',
+                                    ),
+                                    CupertinoSwitch(
+                                        value: state is GametypeCustom,
+                                        onChanged: (v) {
+                                          context
+                                              .read<GametypeCubit>()
+                                              .changeGameType(v);
+                                        })
+                                  ],
+                                ),
+                                if (state is GametypeCustom)
+                                  Padding(
+                                    padding: EdgeInsets.all(24),
+                                    child: TextFormField(
+                                      minLines: 1,
+                                      onChanged: ((value) => context
+                                          .read<LocationCubit>()
+                                          .addCustomLocation(value)),
+                                      decoration: InputDecoration(
+                                        hintStyle: TextStyle(
+                                            fontSize:
+                                                SizeConfig.blockSizeHorizontal *
+                                                    4),
+                                        hintText:
+                                            localization.tr("yourLocation"),
+                                        suffixIcon: Icon(
+                                          Icons.location_city,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                Visibility(
+                                  visible: state is GametypeInitial ||
+                                      locationState.location.isNotEmpty,
+                                  child: StartButton(
+                                    onTapVoid: () async {
+                                      await Get.to(
+                                        () => MyShowCardPage(
+                                          context
+                                              .read<GameSettingsCubit>()
+                                              .state
+                                              .getPlayerList(context
+                                                  .read<LocationCubit>()
+                                                  .state
+                                                  .location),
+                                        ),
+                                      ).then((value) {
+                                        if (value == true) {
+                                          Get.to(
+                                            () => CountDownTimer(
+                                              context
+                                                  .read<GameSettingsCubit>()
+                                                  .state
+                                                  .timer,
+                                            ),
+                                          );
+                                        }
+                                      });
+                                    },
+                                    text: state is GametypeInitial
+                                        ? 'startWithRandom'
+                                        : "start",
+                                  ),
+                                )
+                              ],
+                            );
+                          },
+                        );
+                      }),
+                      SizedBox(
+                        height: SizeConfig.blockSizeVertical * 2,
+                      ),
+                    ],
                   ),
-                  Visibility(
-                      visible: (type == GameType.random),
-                      child: StartWithRandomLocationButton(value: value)),
-                  Visibility(
-                      visible: (type == GameType.playerInput),
-                      child: StartWithYourLocationButton(value: value)),
-                  SizedBox(
-                    height: SizeConfig.blockSizeVertical * 2,
-                  ),
-                ],
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
-    );
-  }
-}
-
-class StartWithRandomLocationButton extends StatelessWidget {
-  const StartWithRandomLocationButton({
-    this.value,
-    Key key,
-  }) : super(key: key);
-  final GlobalVariable value;
-  final GameType type = GameType.playerInput;
-  @override
-  Widget build(BuildContext context) {
-    return StartButton(
-      onTapVoid: () {
-        GlobalVariable _g = Get.find();
-        _g.getPlayerListRandom();
-        Get.to(() => MyShowCardPage());
-      },
-      text: "start",
     );
   }
 }
@@ -225,7 +306,7 @@ class MyTextH2 extends StatelessWidget {
       textAlign: TextAlign.center,
       style: TextStyle(
           fontSize: SizeConfig.blockSizeVertical * 2,
-          color: Theme.of(context).accentColor),
+          color: Theme.of(context).colorScheme.secondary),
     );
   }
 }

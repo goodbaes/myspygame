@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:spyprj1/data/consts/const.dart';
-import 'package:spyprj1/ui/myhomepage.dart';
+import 'package:spygame/data/consts/const.dart';
+import 'package:spygame/ui/myhomepage.dart';
 
 class PlayerCard extends StatelessWidget {
   const PlayerCard(

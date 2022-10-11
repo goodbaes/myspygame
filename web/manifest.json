@@ -1,6 +1,6 @@
 {
-    "name": "spyprj1",
-    "short_name": "spyprj1",
+    "name": "spygame",
+    "short_name": "spygame",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
