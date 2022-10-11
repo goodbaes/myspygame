@@ -1,8 +1,10 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:spygame/data/consts/const.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:spygame/ui/myhomepage.dart';
+
+import '../data/consts/const.dart';
 
 class CountDownTimer extends StatefulWidget {
   CountDownTimer(this.timer);
@@ -14,6 +16,12 @@ class CountDownTimer extends StatefulWidget {
 }
 
 class _CountDownTimerState extends State<CountDownTimer> {
+  var ad = BannerAd(
+    adUnitId: 'ca-app-pub-6557746410207958/2632985003',
+    size: AdSize.banner,
+    request: AdRequest(),
+    listener: BannerAdListener(),
+  );
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -26,6 +34,9 @@ class _CountDownTimerState extends State<CountDownTimer> {
               fit: StackFit.expand,
               alignment: Alignment.topCenter,
               children: [
+                AdWidget(
+                  ad: ad,
+                ),
                 Image(
                   color: Color.fromARGB(200, 0, 0, 0),
                   colorBlendMode: BlendMode.darken,

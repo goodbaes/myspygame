@@ -65,121 +65,122 @@ class Carousel extends StatelessWidget {
                 initialData: player,
                 stream: streamController.stream,
                 builder: (context, snapshot) {
-                  return Stack(
-                      alignment: Alignment.topCenter,
-                      fit: StackFit.loose,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: SizeConfig.blockSizeVertical * 100,
-                            margin: EdgeInsets.symmetric(horizontal: 5.0),
-                            decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.secondary,
-                                borderRadius: BorderRadius.circular(30)),
-                          ),
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            MyTextH1(
-                              text: snapshot.data.status,
-                            ),
-                            Container(
-                              width: SizeConfig.blockSizeHorizontal * 70,
-                              child: MyTextMain(text: snapshot.data.location),
-                            ),
-                          ],
-                        ),
-                        Positioned(
-                          child: AnimatedContainer(
-                            child: Stack(fit: StackFit.expand, children: [
-                              ClipRRect(
-                                borderRadius:
-                                    BorderRadius.circular(kborderRadiusCard),
-                                child: Visibility(
-                                  visible: true,
-                                  child: Image(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(kplayerImage)),
-                                ),
-                              ),
-                              ClipRRect(
-                                borderRadius:
-                                    BorderRadius.circular(kborderRadiusCard),
-                                child: Visibility(
-                                  visible: (snapshot.data is PlayerFromlist),
-                                  child: Image(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(kplayerImage)),
-                                ),
-                              ),
-                              ClipRRect(
-                                borderRadius:
-                                    BorderRadius.circular(kborderRadiusCard),
-                                child: Visibility(
-                                  visible: (snapshot.data is PlayerFromlistSpy),
-                                  child: Image(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(kspyImage)),
-                                ),
-                              ),
-                            ]),
-                            duration: Duration(milliseconds: 300),
-                            curve: Curves.decelerate,
-                            height: snapshot.data == i
-                                ? SizeConfig.blockSizeVertical * 20
-                                : SizeConfig.blockSizeVertical * 75,
-                            width: MediaQuery.of(context).size.width,
-                            margin: EdgeInsets.symmetric(horizontal: 5.0),
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.3),
-                                  spreadRadius: 1,
-                                  blurRadius: 7,
-                                  offset: Offset(
-                                      0, 5), // changes position of shadow
-                                ),
-                              ],
-                              color: Colors.green,
-                              borderRadius:
-                                  BorderRadius.circular(kborderRadiusCard),
+                  return InkWell(
+                    onTap: () {
+                      streamController.add(i);
+                      if (snapshot.data == i) {
+                        streamController.add(player);
+                        controller.nextPage();
+                      }
+                      if (a == playerList.length - 1 && snapshot.data == i) {
+                        Get.back(result: true);
+                        streamController.close();
+                      }
+                    },
+                    child: Stack(
+                        alignment: Alignment.topCenter,
+                        fit: StackFit.loose,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: SizeConfig.blockSizeVertical * 100,
+                              margin: EdgeInsets.symmetric(horizontal: 5.0),
+                              decoration: BoxDecoration(
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                  borderRadius: BorderRadius.circular(30)),
                             ),
                           ),
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          child: Container(
-                            width: SizeConfig.blockSizeHorizontal * 50,
-                            height: SizeConfig.blockSizeVertical * 15,
-                            child: TextButton(
-                              onPressed: () {
-                                streamController.add(i);
-                                if (snapshot.data == i) {
-                                  streamController.add(player);
-                                  controller.nextPage(
-                                      // curve: Curves.easeInSine,
-                                      // duration: Duration(milliseconds: 300)
-                                      );
-                                }
-                                if (a == playerList.length - 1 &&
-                                    snapshot.data == i) {
-                                  Get.back(result: true);
-                                  streamController.close();
-                                }
-                              },
-                              child: MyTextH1(
-                                text: snapshot.data == player
-                                    ? "showCard"
-                                    : "nextCard",
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              MyTextH1(
+                                text: snapshot.data.status,
+                              ),
+                              Container(
+                                width: SizeConfig.blockSizeHorizontal * 70,
+                                child: MyTextMain(text: snapshot.data.location),
+                              ),
+                            ],
+                          ),
+                          Positioned(
+                            child: AnimatedContainer(
+                              child: Stack(fit: StackFit.expand, children: [
+                                ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.circular(kborderRadiusCard),
+                                  child: Visibility(
+                                    visible: true,
+                                    child: Image(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(kplayerImage)),
+                                  ),
+                                ),
+                                ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.circular(kborderRadiusCard),
+                                  child: Visibility(
+                                    visible: (snapshot.data is PlayerFromlist),
+                                    child: Image(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(kplayerImage)),
+                                  ),
+                                ),
+                                ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.circular(kborderRadiusCard),
+                                  child: Visibility(
+                                    visible:
+                                        (snapshot.data is PlayerFromlistSpy),
+                                    child: Image(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(kspyImage)),
+                                  ),
+                                ),
+                              ]),
+                              duration: Duration(milliseconds: 300),
+                              curve: Curves.decelerate,
+                              height: snapshot.data == i
+                                  ? SizeConfig.blockSizeVertical * 20
+                                  : SizeConfig.blockSizeVertical * 75,
+                              width: MediaQuery.of(context).size.width,
+                              margin: EdgeInsets.symmetric(horizontal: 5.0),
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.3),
+                                    spreadRadius: 1,
+                                    blurRadius: 7,
+                                    offset: Offset(
+                                        0, 5), // changes position of shadow
+                                  ),
+                                ],
+                                color: Colors.green,
+                                borderRadius:
+                                    BorderRadius.circular(kborderRadiusCard),
                               ),
                             ),
                           ),
-                        ),
-                      ]);
+                          Positioned(
+                            bottom: 0,
+                            child: Container(
+                              width: SizeConfig.blockSizeHorizontal * 50,
+                              height: SizeConfig.blockSizeVertical * 15,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 30.0),
+                                child: MyTextH1(
+                                  text: snapshot.data == player
+                                      ? "showCard"
+                                      : "nextCard",
+                                ),
+                              ),
+                            ),
+                          ),
+                        ]),
+                  );
                 });
           },
         );
