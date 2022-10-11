@@ -21,6 +21,9 @@ class GameSettingsCubit extends Cubit<GameSettingsState> {
   }
 
   void decrementPlayer() {
+    if (tempSecondState.players == 0) {
+      return;
+    }
     tempState.players--;
     tempSecondState.players--;
     emitState();
@@ -33,6 +36,9 @@ class GameSettingsCubit extends Cubit<GameSettingsState> {
   }
 
   void decrementSpy() {
+    if (tempSecondState.spys == 0) {
+      return;
+    }
     tempState.spys--;
     tempSecondState.spys--;
     emitState();
@@ -45,8 +51,11 @@ class GameSettingsCubit extends Cubit<GameSettingsState> {
   }
 
   void decrementTime() {
-    tempState.spys--;
-    tempSecondState.spys--;
+    if (tempSecondState.timer == 0) {
+      return;
+    }
+    tempState.timer--;
+    tempSecondState.timer--;
     emitState();
   }
 }
