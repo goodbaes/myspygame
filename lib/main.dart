@@ -34,7 +34,6 @@ class MyApp extends StatelessWidget {
         locale: context.locale,
         theme: MyTheam.lightTheme,
         home: StartScreen(),
-        //  MyHomePage(),
       ),
     );
   }
