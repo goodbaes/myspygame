@@ -21,7 +21,6 @@ void main() async {
         path: 'assets/lang'),
   );
 }
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
