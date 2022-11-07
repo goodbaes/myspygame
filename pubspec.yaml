@@ -19,19 +19,20 @@ version: 1.0.3+4
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
+  flutter: ">3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  carousel_slider: ^3.0.0
-  circular_countdown_timer: ^0.2.0
-  cupertino_icons: ^1.0.2
-  easy_localization: ^3.0.0
-  equatable: ^2.0.0
-  flutter_bloc: ^8.0.1
-  get: ^3.26.0
+  carousel_slider: ^4.1.1
+  circular_countdown_timer: ^0.2.2
+  cupertino_icons: ^1.0.5
+  easy_localization: ^3.0.1
+  equatable: ^2.0.5
+  flutter_bloc: ^8.1.1
+  get: ^4.6.5
   transparent_image: ^2.0.0
-  google_mobile_ads: ^2.0.1
+  google_mobile_ads: ^2.1.0
 
 dev_dependencies:
   flutter_test:
