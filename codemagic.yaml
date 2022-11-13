@@ -37,7 +37,7 @@ workflows:
       - name: Flutter build ipa with autoincrement version
         script:
           CURRENT_BUILD_NUMBER=$(app-store-connect get-latest-testflight-build-number "$APP_STORE_ID")
-          flutter build ipa --release --export-options-plist ~/export_options.plist --build-number=$(($CURRENT_BUILD_NUMBER + 1))
+          flutter build ipa --release --build-number=$(($CURRENT_BUILD_NUMBER + 1)) --export-options-plist ~/export_options.plist 
       
       
     artifacts:
