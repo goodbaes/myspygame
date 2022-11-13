@@ -37,8 +37,7 @@ workflows:
       - name: Get the latest build number
         script: |
              CURRENT_BUILD_NUMBER=$(app-store-connect get-latest-testflight-build-number "$APP_APPLE_ID")
-             flutter build ipa --build-number=$((CURRENT_BUILD_NUMBER+1))
-       
+             flutter build ipa --release --build-number=$((CURRENT_BUILD_NUMBER+1)) --export-options-plist ~/export_options.plist 
       
       
     artifacts:
