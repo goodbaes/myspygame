@@ -34,7 +34,7 @@ workflows:
         --create
       - keychain add-certificates
       - xcode-project use-profiles
-      - CURRENT_BUILD_NUMBER=$(app-store-connect get-latest-testflight-build- number "$APP_STORE_ID")
+      - CURRENT_BUILD_NUMBER=$(app-store-connect get-latest-testflight-build-number "$APP_STORE_ID")
       - flutter build ipa --export-options-plist ~/export_options.plist --build-number=$(($CURRENT_BUILD_NUMBER+1))
       
       
