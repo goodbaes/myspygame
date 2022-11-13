@@ -27,10 +27,6 @@ workflows:
         - pattern: start-codemagic-build
           include: true
     scripts:
-      - name: Get the latest build number
-        script: |
-          cd ./ios # avgtool must run in the folder where xcodeproj file is located
-          agvtool new-version -all $(($CURRENT_PROJECT_VERSION + 1))
       - flutter packages pub get
       - find . -name "Podfile" -execdir pod install \;
       - keychain initialize
@@ -38,7 +34,11 @@ workflows:
         --create
       - keychain add-certificates
       - xcode-project use-profiles
-      - flutter build ipa --release --export-options-plist ~/export_options.plist 
+      - name: Get the latest build number
+        script: |
+             LATEST_BUILD_NUMBER=$(app-store-connect get-latest-testflight-build-number $APP_APPLE_ID)
+             flutter build ipa --build-number=$((LATEST_BUILD_NUMBER+1))
+
       
       
     artifacts:
