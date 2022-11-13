@@ -6,6 +6,8 @@ workflows:
     name: Default Workflow
     max_build_duration: 60
     environment:
+      groups:
+        - app_store_credentials
       vars:
         APP_STORE_CONNECT_ISSUER_ID: 781f963c-32fa-4072-9272-dee7269065d3
         APP_STORE_CONNECT_KEY_IDENTIFIER: BHMC3M34X6
@@ -25,7 +27,6 @@ workflows:
         - pattern: start-codemagic-build
           include: true
     scripts:
-      - CURRENT_BUILD_NUMBER=$(app-store-connect get-latest-testflight-build- number "$APP_STORE_ID")
       - flutter packages pub get
       - find . -name "Podfile" -execdir pod install \;
       - keychain initialize
@@ -33,6 +34,7 @@ workflows:
         --create
       - keychain add-certificates
       - xcode-project use-profiles
+      - CURRENT_BUILD_NUMBER=$(app-store-connect get-latest-testflight-build- number "$APP_STORE_ID")
       - flutter build ipa --export-options-plist ~/export_options.plist --build-number=$(($CURRENT_BUILD_NUMBER+1))
       
       
