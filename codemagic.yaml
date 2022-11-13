@@ -25,9 +25,7 @@ workflows:
         - pattern: start-codemagic-build
           include: true
     scripts:
-      - name: Increment build number
-        script: |
-          agvtool new-version -all $(($(app-store-connect get-latest-testflight-build-number "$APP_STORE_APP_ID") + 1))
+      - CURRENT_BUILD_NUMBER=$(app-store-connect get-latest-testflight-build- number "$APP_STORE_ID")
       - flutter packages pub get
       - find . -name "Podfile" -execdir pod install \;
       - keychain initialize
@@ -35,7 +33,7 @@ workflows:
         --create
       - keychain add-certificates
       - xcode-project use-profiles
-      - flutter build ipa --export-options-plist ~/export_options.plist
+      - flutter build ipa --export-options-plist ~/export_options.plist --build-number=$(($CURRENT_BUILD_NUMBER+1))
       
       
     artifacts:
