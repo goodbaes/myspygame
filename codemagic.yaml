@@ -9,6 +9,7 @@ workflows:
       groups:
         - app_store_credentials
       vars:
+        APP_APPLE_ID: 6443799322
         APP_STORE_CONNECT_ISSUER_ID: 781f963c-32fa-4072-9272-dee7269065d3
         APP_STORE_CONNECT_KEY_IDENTIFIER: BHMC3M34X6
         APP_STORE_CONNECT_PRIVATE_KEY: Encrypted(Z0FBQUFBQmpjVkVtaFU4ckgtNlFQRjRmNXJONkVGendJTkJlZ1FzOUdFVzBZNENvNDFheWUwbG1WUXJNUTEwR1ZlMURNMWh6b2xha0U4aEc1R1ZkXzNVeVI2LThIM1Z5WVFZYmFGTjJLMmZoM3lEYnJ5aHkyMUV2UU1YMndhZC1QaGV6STRrZkkwVGdoei04NmdwUkpDZGo3VVFlTWhUMEtWb2I2d3NmWGcyRFlzd1F5bHlOLVFNZURrZ1pERjUzRFVLZThJZFMwRlRXWXUxWEdReGk3YU56T1FndDRzSGZrTXpreHd3blBFREMwZTZqZGpoTGlRaW5lQWhPX1dURmlIM0xUME1DT3dPWDlORGF0SnhleDh2SUg4TXZ5ckNZdW1ZNk0zaEREeTMyNjRkOElSUHFxcjVUYXF6aXNJN0NYVTZKaEd2U0x2YzM0emtsZDFidXRUVWdKenJqeUxyT0F6UU1KcDE1Rk9YdlhvVTdNaU4xQ3lyYjl6cGxmNFVfTE9Zejd0dko2bGkyeU4yLTZIeHotXzRLSndPQXNpTUxvUWNZQ3hpUklMVTVVa25OVzd5enZ2Yz0=)
@@ -29,7 +30,7 @@ workflows:
     scripts:
       - name: Get the latest build number
         script: | 
-          LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_APPLE_ID")
+          LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number $APP_APPLE_ID)
           cd ./ios # avgtool must run in the folder where xcodeproj file is located
           agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
       - flutter packages pub get
