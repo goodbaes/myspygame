@@ -1,37 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:get/get.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:spygame/ui/startscreen.dart';
-import 'package:spygame/ui/theme/customtheme.dart';
+import 'package:myspygame/presentation/screens/home_screen.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  await MobileAds.instance.initialize();
-  await EasyLocalization.ensureInitialized();
-  runApp(
-    EasyLocalization(
-        child: MyApp(),
-        fallbackLocale: Locale('en', 'US'),
-        supportedLocales: [
-          Locale('en', 'US'),
-          Locale('ru'),
-        ],
-        path: 'assets/lang'),
-  );
+void main() {
+  runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: GetMaterialApp(
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
-        theme: MyTheam.lightTheme,
-        home: StartScreen(),
+    return MaterialApp(
+      title: 'Spy Game',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: const HomeScreen(),
     );
   }
 }
