@@ -1,0 +1,21 @@
+{
+  "app_title": "Игра в шпиона",
+  "game_theme": "Тема игры",
+  "home_screen_title": "Игра в шпиона",
+  "players": "Игроки",
+  "spies": "Шпионы",
+  "game_time": "Время игры",
+  "minutes_short": "мин",
+  "game_theme_label": "Тема игры",
+  "start_game": "Начать игру",
+  "settings": "Настройки",
+  "error_fetching_word": "Ошибка получения слова: ",
+  "default_theme": "Общественные места",
+  "roles_screen_title": "Роли",
+  "tap_to_see_role": "Нажмите, чтобы увидеть свою роль",
+  "you_are_spy": "Вы шпион",
+  "you_are_citizen": "Вы мирный житель",
+  "theme": "Тема",
+  "word": "Слово",
+  "try_to_blend_in": "Постарайтесь не выделяться!"
+}

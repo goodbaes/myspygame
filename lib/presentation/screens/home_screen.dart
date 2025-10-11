@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myspygame/data/api.dart';
+import 'package:myspygame/l10n/localization.dart';
 import 'package:myspygame/model/game_round_settings.dart';
 import 'package:myspygame/presentation/screens/roles_screen.dart';
 
@@ -14,13 +15,20 @@ class _HomeScreenState extends State<HomeScreen> {
   double _playerCount = 3;
   double _spyCount = 1;
   double _gameTime = 5; // in minutes
-  final TextEditingController _themeController = TextEditingController(text: 'Общественные места');
+  late TextEditingController _themeController;
   final List<String> _usedWords = [];
   bool _isLoading = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _themeController = TextEditingController(text: l10n.default_theme);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Spy Game')),
+      appBar: AppBar(title: Text(l10n.home_screen_title)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Stack(
@@ -29,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Players: ${_playerCount.toInt()}'),
+                Text('${l10n.players}: ${_playerCount.toInt()}'),
                 Slider(
                   value: _playerCount,
                   min: 3,
@@ -46,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
                 const SizedBox(height: 20),
-                Text('Spies: ${_spyCount.toInt()}'),
+                Text('${l10n.spies}: ${_spyCount.toInt()}'),
                 Slider(
                   value: _spyCount,
                   min: 1,
@@ -60,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
                 const SizedBox(height: 20),
-                Text('Game Time: ${_gameTime.toInt()} min'),
+                Text('${l10n.game_time}: ${_gameTime.toInt()} ${l10n.minutes_short}'),
                 Slider(
                   value: _gameTime.toDouble(),
                   min: 1,
@@ -75,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 20),
                 TextField(
                   controller: _themeController,
-                  decoration: const InputDecoration(labelText: 'Game Theme'),
+                  decoration: InputDecoration(labelText: l10n.game_theme_label),
                 ),
                 const SizedBox(height: 40),
                 ElevatedButton(
@@ -106,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     } catch (e) {
                       ScaffoldMessenger.of(
                         context,
-                      ).showSnackBar(SnackBar(content: Text('Error fetching word: $e')));
+                      ).showSnackBar(SnackBar(content: Text('${l10n.error_fetching_word}$e')));
                       setState(() {
                         _isLoading = false;
                       });
@@ -117,14 +125,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       _isLoading = false;
                     });
                   },
-                  child: const Text('Start Game'),
+                  child: Text(l10n.start_game),
                 ),
                 const SizedBox(height: 10),
                 TextButton(
                   onPressed: () {
                     // TODO: Implement settings navigation
                   },
-                  child: const Text('Settings'),
+                  child: Text(l10n.settings),
                 ),
               ],
             ),

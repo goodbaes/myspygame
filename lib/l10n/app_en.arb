@@ -1,0 +1,21 @@
+{
+  "app_title": "Spy Game",
+  "game_theme": "Game Theme",
+  "home_screen_title": "Spy Game",
+  "players": "Players",
+  "spies": "Spies",
+  "game_time": "Game Time",
+  "minutes_short": "min",
+  "game_theme_label": "Game Theme",
+  "start_game": "Start Game",
+  "settings": "Settings",
+  "error_fetching_word": "Error fetching word: ",
+  "default_theme": "Public places",
+  "roles_screen_title": "Roles",
+  "tap_to_see_role": "Tap to see your role",
+  "you_are_spy": "You are a Spy",
+  "you_are_citizen": "You are a Citizen",
+  "theme": "Theme",
+  "word": "Word",
+  "try_to_blend_in": "Try to blend in!"
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myspygame/l10n/localization.dart';
 import 'package:myspygame/model/game_round_settings.dart';
 
 class RolesScreen extends StatefulWidget {
@@ -50,7 +51,9 @@ class _RolesScreenState extends State<RolesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Roles')),
+      appBar: AppBar(
+          title: Text(
+              l10n.roles_screen_title)),
       body: PageView.builder(
         controller: _pageController,
         itemCount: widget.settings.playerCount,
@@ -67,10 +70,10 @@ class _RolesScreenState extends State<RolesScreen> {
                 onTap: _showRole,
                 child: Container(
                   color: Colors.blueAccent,
-                  child: const Center(
+                  child: Center(
                     child: Text(
-                      'Tap to see your role',
-                      style: TextStyle(fontSize: 24, color: Colors.white),
+                      l10n.tap_to_see_role,
+                      style: const TextStyle(fontSize: 24, color: Colors.white),
                     ),
                   ),
                 ),
@@ -84,19 +87,26 @@ class _RolesScreenState extends State<RolesScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        isSpy ? 'You are a Spy' : 'You are a Citizen',
-                        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                        isSpy
+                            ? l10n.you_are_spy
+                            : l10n
+                                .you_are_citizen,
+                        style: const TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 20),
                       if (!isSpy) ...[
                         Text(
-                          'Theme: ${widget.settings.theme}',
+                          '${l10n.theme}: ${widget.settings.theme}',
                           style: const TextStyle(fontSize: 20),
                         ),
                         const SizedBox(height: 10),
-                        Text('Word: ${widget.settings.word}', style: const TextStyle(fontSize: 20)),
+                        Text(
+                            '${l10n.word}: ${widget.settings.word}',
+                            style: const TextStyle(fontSize: 20)),
                       ] else ...[
-                        const Text('Try to blend in!', style: TextStyle(fontSize: 20)),
+                        Text(l10n.try_to_blend_in,
+                            style: const TextStyle(fontSize: 20)),
                       ],
                     ],
                   ),
