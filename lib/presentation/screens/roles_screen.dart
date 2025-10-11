@@ -76,33 +76,29 @@ class _RolesScreenState extends State<RolesScreen> {
                 ),
               ),
               secondChild: GestureDetector(
+                behavior: HitTestBehavior.opaque, // попробуй убрать!
+
                 onTap: _nextPage,
                 child: Center(
-                  child: Container(
-                    color: Colors.white,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        isSpy ? 'You are a Spy' : 'You are a Citizen',
+                        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 20),
+                      if (!isSpy) ...[
                         Text(
-                          isSpy ? 'You are a Spy' : 'You are a Citizen',
-                          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                          'Theme: ${widget.settings.theme}',
+                          style: const TextStyle(fontSize: 20),
                         ),
-                        const SizedBox(height: 20),
-                        if (!isSpy) ...[
-                          Text(
-                            'Theme: ${widget.settings.theme}',
-                            style: const TextStyle(fontSize: 20),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            'Word: ${widget.settings.word}',
-                            style: const TextStyle(fontSize: 20),
-                          ),
-                        ] else ...[
-                          const Text('Try to blend in!', style: TextStyle(fontSize: 20)),
-                        ],
+                        const SizedBox(height: 10),
+                        Text('Word: ${widget.settings.word}', style: const TextStyle(fontSize: 20)),
+                      ] else ...[
+                        const Text('Try to blend in!', style: TextStyle(fontSize: 20)),
                       ],
-                    ),
+                    ],
                   ),
                 ),
               ),
