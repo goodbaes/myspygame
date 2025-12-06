@@ -1,6 +1,6 @@
 import 'package:app_localization/localization_service.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:myspygame/model/game_round_settings.dart';
 
 class RolesScreen extends StatefulWidget {
   const RolesScreen({super.key, required this.settings});

@@ -1,0 +1,12 @@
+name: domain
+description: Shared domain models.
+version: 1.0.0
+resolution: workspace
+publish_to: 'none'
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter

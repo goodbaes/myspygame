@@ -1,8 +1,7 @@
+import 'package:app_localization/localization_service.dart' show l10n;
 import 'package:flutter/material.dart';
 import 'package:myspygame/data/api.dart';
-import 'package:myspygame/l10n/localization.dart';
-import 'package:myspygame/model/game_round_settings.dart';
-import 'package:myspygame/presentation/screens/roles_screen.dart';
+import 'package:domain/domain.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -41,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Slider(
                   value: _playerCount,
                   min: 3,
-                  max: 10,
+                  max: 20,
                   divisions: 7,
                   label: _playerCount.round().toString(),
                   onChanged: (double value) {
@@ -68,7 +67,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
                 const SizedBox(height: 20),
-                Text('${l10n.game_time}: ${_gameTime.toInt()} ${l10n.minutes_short}'),
+                Text(
+                  '${l10n.game_time}: ${_gameTime.toInt()} ${l10n.minutes_short}',
+                ),
                 Slider(
                   value: _gameTime.toDouble(),
                   min: 1,
@@ -105,16 +106,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         theme: _themeController.text,
                         word: word,
                       );
-                      Navigator.push(
+                      Navigator.pushNamed(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => RolesScreen(settings: gameSettings),
-                        ),
+                        '/roles',
+                        arguments: gameSettings,
                       );
                     } catch (e) {
-                      ScaffoldMessenger.of(
-                        context,
-                      ).showSnackBar(SnackBar(content: Text('${l10n.error_fetching_word}$e')));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('${l10n.error_fetching_word}$e'),
+                        ),
+                      );
                       setState(() {
                         _isLoading = false;
                       });
