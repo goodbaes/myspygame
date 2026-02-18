@@ -1,10 +1,11 @@
-import 'package:app_localization/localization_service.dart' show l10n;
-import 'package:flutter/material.dart';
+import 'package:app_localization/localization_service.dart';
 import 'package:domain/domain.dart';
+import 'package:flutter/material.dart';
 
 class RolesScreen extends StatefulWidget {
   const RolesScreen({super.key, required this.settings});
   final GameRoundSettings settings;
+
   @override
   State<RolesScreen> createState() => _RolesScreenState();
 }
@@ -13,11 +14,11 @@ class _RolesScreenState extends State<RolesScreen> {
   final PageController _pageController = PageController(initialPage: 0);
   int _currentPage = 0;
   final List<bool> _isRoleRevealed = [];
+
   @override
   void initState() {
     super.initState();
     _pageController.addListener(() {
-      // Проверяем, что контроллер уже подключён
       if (_pageController.hasClients) {
         final newPage = _pageController.page?.round() ?? 0;
         if (newPage != _currentPage) {
@@ -50,6 +51,7 @@ class _RolesScreenState extends State<RolesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Scaffold(
       appBar: AppBar(title: Text(l10n.roles_screen_title)),
       body: PageView.builder(
@@ -77,8 +79,7 @@ class _RolesScreenState extends State<RolesScreen> {
                 ),
               ),
               secondChild: GestureDetector(
-                behavior: HitTestBehavior.opaque, // попробуй убрать!
-
+                behavior: HitTestBehavior.opaque,
                 onTap: _nextPage,
                 child: Center(
                   child: Column(

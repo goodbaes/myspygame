@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class RolesScreen extends StatefulWidget {
   const RolesScreen({super.key, required this.settings});
   final GameRoundSettings settings;
+
   @override
   State<RolesScreen> createState() => _RolesScreenState();
 }
@@ -13,11 +14,11 @@ class _RolesScreenState extends State<RolesScreen> {
   final PageController _pageController = PageController(initialPage: 0);
   int _currentPage = 0;
   final List<bool> _isRoleRevealed = [];
+
   @override
   void initState() {
     super.initState();
     _pageController.addListener(() {
-      // Проверяем, что контроллер уже подключён
       if (_pageController.hasClients) {
         final newPage = _pageController.page?.round() ?? 0;
         if (newPage != _currentPage) {
@@ -27,7 +28,7 @@ class _RolesScreenState extends State<RolesScreen> {
     });
   }
 
-  _nextPage() {
+  void _nextPage() {
     if (_currentPage < widget.settings.playerCount - 1) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
@@ -38,7 +39,7 @@ class _RolesScreenState extends State<RolesScreen> {
     }
   }
 
-  _showRole() {
+  void _showRole() {
     setState(() {
       if (_isRoleRevealed.length < widget.settings.playerCount) {
         _isRoleRevealed.add(true);
@@ -50,6 +51,7 @@ class _RolesScreenState extends State<RolesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Scaffold(
       appBar: AppBar(title: Text(l10n.roles_screen_title)),
       body: PageView.builder(
@@ -60,8 +62,7 @@ class _RolesScreenState extends State<RolesScreen> {
 
           return Center(
             child: AnimatedCrossFade(
-              crossFadeState:
-                  _isRoleRevealed.length > index && _isRoleRevealed[index]
+              crossFadeState: _isRoleRevealed.length > index && _isRoleRevealed[index]
                   ? CrossFadeState.showSecond
                   : CrossFadeState.showFirst,
               duration: const Duration(milliseconds: 300),
@@ -78,8 +79,7 @@ class _RolesScreenState extends State<RolesScreen> {
                 ),
               ),
               secondChild: GestureDetector(
-                behavior: HitTestBehavior.opaque, // попробуй убрать!
-
+                behavior: HitTestBehavior.opaque,
                 onTap: _nextPage,
                 child: Center(
                   child: Column(
@@ -87,10 +87,7 @@ class _RolesScreenState extends State<RolesScreen> {
                     children: [
                       Text(
                         isSpy ? l10n.you_are_spy : l10n.you_are_citizen,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 20),
                       if (!isSpy) ...[
@@ -104,10 +101,7 @@ class _RolesScreenState extends State<RolesScreen> {
                           style: const TextStyle(fontSize: 20),
                         ),
                       ] else ...[
-                        Text(
-                          l10n.try_to_blend_in,
-                          style: const TextStyle(fontSize: 20),
-                        ),
+                        Text(l10n.try_to_blend_in, style: const TextStyle(fontSize: 20)),
                       ],
                     ],
                   ),

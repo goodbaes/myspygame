@@ -1,7 +1,7 @@
-import 'package:app_localization/localization_service.dart' show l10n;
+import 'package:app_localization/localization_service.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:myspygame/data/api.dart';
-import 'package:domain/domain.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,11 +21,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _themeController = TextEditingController(text: l10n.default_theme);
+    _themeController = TextEditingController(text: context.l10n.default_theme);
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Scaffold(
       appBar: AppBar(title: Text(l10n.home_screen_title)),
       body: Padding(
