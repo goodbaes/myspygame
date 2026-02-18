@@ -1,11 +1,26 @@
 import 'package:flutter/widgets.dart';
 
-/// A service that provides top-level navigation capabilities without a context.
+/// A service that provides top-level navigation capabilities without a [BuildContext].
 ///
-/// This uses a [navigatorKey] to access the [NavigatorState] from anywhere
-/// in the application.
+/// [NavigationService] is a singleton — the same [navigatorKey] instance is
+/// shared across the entire app, which is required for context-free navigation.
+///
+/// Register the key with [MaterialApp]:
+/// ```dart
+/// MaterialApp(navigatorKey: NavigationService.instance.navigatorKey)
+/// ```
+///
+/// Navigate from anywhere (including BLoCs and services):
+/// ```dart
+/// NavigationService.instance.pushNamed(AppRoutes.roles, arguments: settings);
+/// ```
 class NavigationService {
-  /// The global key used by the [MaterialApp] to provide access to the [Navigator].
+  NavigationService._();
+
+  /// The single shared instance.
+  static final NavigationService instance = NavigationService._();
+
+  /// The global key used by [MaterialApp] to provide access to the [Navigator].
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   /// Pushes a named route onto the navigator.

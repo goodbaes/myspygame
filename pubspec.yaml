@@ -1,12 +1,13 @@
 name: myspygame
 description: "A new Flutter project."
 
-publish_to: 'none' 
+publish_to: "none"
 
 version: 1.0.0+1
 
 workspace:
   - packages/features/roles_screen
+  - packages/features/home_screen
   - packages/core/app_localization
   - packages/core/architecture
   - packages/core/domain
@@ -21,13 +22,14 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_localizations:
     sdk: flutter
-  http: ^1.2.1
   app_localization:
     path: packages/core/app_localization
   architecture:
     path: packages/core/architecture
   domain:
     path: packages/core/domain
+  home_screen:
+    path: packages/features/home_screen
   roles_screen:
     path: packages/features/roles_screen
 
@@ -38,8 +40,6 @@ dev_dependencies:
   flutter_lints: ^5.0.0
 
 flutter:
-
   uses-material-design: true
-
 
   generate: true

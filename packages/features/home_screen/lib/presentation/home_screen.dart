@@ -1,7 +1,8 @@
 import 'package:app_localization/localization_service.dart';
+import 'package:architecture/architecture.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:myspygame/data/api.dart';
+import 'package:home_screen/data/gemini_api.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   double _playerCount = 3;
   double _spyCount = 1;
-  double _gameTime = 5; // in minutes
+  double _gameTimeMinutes = 5;
   late TextEditingController _themeController;
   final List<String> _usedWords = [];
   bool _isLoading = false;
@@ -68,15 +69,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
                 const SizedBox(height: 20),
-                Text('${l10n.game_time}: ${_gameTime.toInt()} ${l10n.minutes_short}'),
+                Text('${l10n.game_time}: ${_gameTimeMinutes.toInt()} ${l10n.minutes_short}'),
                 Slider(
-                  value: _gameTime.toDouble(),
+                  value: _gameTimeMinutes,
                   min: 1,
                   max: 20,
-                  label: _gameTime.toString(),
+                  label: _gameTimeMinutes.toString(),
                   onChanged: (value) {
                     setState(() {
-                      _gameTime = value;
+                      _gameTimeMinutes = value;
                     });
                   },
                 ),
@@ -89,9 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ElevatedButton(
                   onPressed: () async {
                     if (_isLoading) return;
-                    setState(() {
-                      _isLoading = true;
-                    });
+                    setState(() => _isLoading = true);
                     try {
                       final word = await GeminiApi.getGeminiWord(
                         topic: _themeController.text,
@@ -101,26 +100,23 @@ class _HomeScreenState extends State<HomeScreen> {
                       final gameSettings = GameRoundSettings(
                         playerCount: _playerCount.toInt(),
                         spyCount: _spyCount.toInt(),
-                        gameTime: Duration(minutes: _gameTime.toInt()),
+                        gameTime: Duration(minutes: _gameTimeMinutes.toInt()),
                         theme: _themeController.text,
                         word: word,
                       );
                       if (!context.mounted) return;
-                      Navigator.pushNamed(context, '/roles', arguments: gameSettings);
+                      NavigationService.instance.pushNamed(
+                        AppRoutes.roles,
+                        arguments: gameSettings,
+                      );
                     } catch (e) {
                       if (!context.mounted) return;
                       ScaffoldMessenger.of(
                         context,
                       ).showSnackBar(SnackBar(content: Text('${l10n.error_fetching_word}$e')));
-                      setState(() {
-                        _isLoading = false;
-                      });
-                      return;
+                    } finally {
+                      if (mounted) setState(() => _isLoading = false);
                     }
-
-                    setState(() {
-                      _isLoading = false;
-                    });
                   },
                   child: Text(l10n.start_game),
                 ),

@@ -1,7 +1,7 @@
 import 'package:app_localization/l10n/app_localizations.dart';
 import 'package:architecture/architecture.dart';
 import 'package:flutter/material.dart';
-import 'package:myspygame/presentation/screens/home_screen.dart';
+import 'package:home_screen/home_screen.dart';
 import 'package:roles_screen/roles_screen.dart';
 
 void main() {
@@ -17,18 +17,19 @@ class RootAppWrapper extends StatefulWidget {
 
 class _RootAppWrapperState extends State<RootAppWrapper> {
   final FeatureRegistry _featureRegistry = FeatureRegistry();
-  final NavigationService _navigationService = NavigationService();
 
   @override
   void initState() {
     super.initState();
-    _featureRegistry.register(RolesFeature());
+    _featureRegistry
+      ..register(HomeFeature())
+      ..register(RolesFeature());
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: _navigationService.navigatorKey,
+      navigatorKey: NavigationService.instance.navigatorKey,
       title: 'Spy Game',
       theme: ThemeData(primarySwatch: Colors.blue),
       localizationsDelegates: const [AppLocalizations.delegate],

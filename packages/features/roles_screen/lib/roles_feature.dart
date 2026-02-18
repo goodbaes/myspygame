@@ -9,9 +9,8 @@ class RolesFeature extends Feature {
 
   @override
   Map<String, WidgetBuilder> get routes => {
-    '/roles': (context) {
-      final settings =
-          ModalRoute.of(context)!.settings.arguments as GameRoundSettings;
+    AppRoutes.roles: (context) {
+      final settings = ModalRoute.of(context)!.settings.arguments as GameRoundSettings;
       return RolesScreen(settings: settings);
     },
   };
