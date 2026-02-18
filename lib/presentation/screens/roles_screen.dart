@@ -1,6 +1,6 @@
-import 'package:app_localization/localization_service.dart';
+import 'package:app_localization/localization_service.dart' show l10n;
 import 'package:flutter/material.dart';
-import 'package:myspygame/model/game_round_settings.dart';
+import 'package:domain/domain.dart';
 
 class RolesScreen extends StatefulWidget {
   const RolesScreen({super.key, required this.settings});
@@ -27,7 +27,7 @@ class _RolesScreenState extends State<RolesScreen> {
     });
   }
 
-  _nextPage() {
+  void _nextPage() {
     if (_currentPage < widget.settings.playerCount - 1) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
@@ -38,7 +38,7 @@ class _RolesScreenState extends State<RolesScreen> {
     }
   }
 
-  _showRole() {
+  void _showRole() {
     setState(() {
       if (_isRoleRevealed.length < widget.settings.playerCount) {
         _isRoleRevealed.add(true);
@@ -60,8 +60,7 @@ class _RolesScreenState extends State<RolesScreen> {
 
           return Center(
             child: AnimatedCrossFade(
-              crossFadeState:
-                  _isRoleRevealed.length > index && _isRoleRevealed[index]
+              crossFadeState: _isRoleRevealed.length > index && _isRoleRevealed[index]
                   ? CrossFadeState.showSecond
                   : CrossFadeState.showFirst,
               duration: const Duration(milliseconds: 300),
@@ -87,10 +86,7 @@ class _RolesScreenState extends State<RolesScreen> {
                     children: [
                       Text(
                         isSpy ? l10n.you_are_spy : l10n.you_are_citizen,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 20),
                       if (!isSpy) ...[
@@ -104,10 +100,7 @@ class _RolesScreenState extends State<RolesScreen> {
                           style: const TextStyle(fontSize: 20),
                         ),
                       ] else ...[
-                        Text(
-                          l10n.try_to_blend_in,
-                          style: const TextStyle(fontSize: 20),
-                        ),
+                        Text(l10n.try_to_blend_in, style: const TextStyle(fontSize: 20)),
                       ],
                     ],
                   ),

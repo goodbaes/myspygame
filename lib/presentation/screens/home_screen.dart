@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   max: 20,
                   divisions: 7,
                   label: _playerCount.round().toString(),
-                  onChanged: (double value) {
+                  onChanged: (value) {
                     setState(() {
                       _playerCount = value;
                       if (_spyCount > _playerCount - 1) {
@@ -60,22 +60,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   max: _playerCount > 1 ? _playerCount - 1 : 1,
                   divisions: _playerCount > 2 ? (_playerCount - 2).toInt() : 1,
                   label: _spyCount.round().toString(),
-                  onChanged: (double value) {
+                  onChanged: (value) {
                     setState(() {
                       _spyCount = value;
                     });
                   },
                 ),
                 const SizedBox(height: 20),
-                Text(
-                  '${l10n.game_time}: ${_gameTime.toInt()} ${l10n.minutes_short}',
-                ),
+                Text('${l10n.game_time}: ${_gameTime.toInt()} ${l10n.minutes_short}'),
                 Slider(
                   value: _gameTime.toDouble(),
                   min: 1,
                   max: 20,
                   label: _gameTime.toString(),
-                  onChanged: (double value) {
+                  onChanged: (value) {
                     setState(() {
                       _gameTime = value;
                     });
@@ -94,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       _isLoading = true;
                     });
                     try {
-                      final word = await getGeminiWord(
+                      final word = await GeminiApi.getGeminiWord(
                         topic: _themeController.text,
                         usedWords: _usedWords,
                       );
@@ -106,17 +104,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         theme: _themeController.text,
                         word: word,
                       );
-                      Navigator.pushNamed(
-                        context,
-                        '/roles',
-                        arguments: gameSettings,
-                      );
+                      if (!context.mounted) return;
+                      Navigator.pushNamed(context, '/roles', arguments: gameSettings);
                     } catch (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('${l10n.error_fetching_word}$e'),
-                        ),
-                      );
+                      if (!context.mounted) return;
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(SnackBar(content: Text('${l10n.error_fetching_word}$e')));
                       setState(() {
                         _isLoading = false;
                       });

@@ -2,7 +2,7 @@ name: roles_screen
 description: "A new Flutter package project."
 version: 1.0.0+1
 resolution: workspace
-publish_to: 'none'
+publish_to: "none"
 
 environment:
   sdk: ^3.9.2
@@ -12,11 +12,11 @@ dependencies:
   flutter:
     sdk: flutter
   architecture:
-    path: ../../../core/architecture
+    path: ../../core/architecture
   domain:
-    path: ../../../core/domain
+    path: ../../core/domain
   app_localization:
-    path: ../../../core/app_localization
+    path: ../../core/app_localization
 
 dev_dependencies:
   flutter_test:

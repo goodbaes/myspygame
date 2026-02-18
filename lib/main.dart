@@ -36,7 +36,7 @@ class _RootAppWrapperState extends State<RootAppWrapper> {
       navigatorKey: navigationService.navigatorKey,
       title: 'Spy Game',
       theme: ThemeData(primarySwatch: Colors.blue),
-      localizationsDelegates: [AppLocalizations.delegate],
+      localizationsDelegates: const [AppLocalizations.delegate],
       supportedLocales: const [Locale('en', 'US'), Locale('ru', 'RU')],
       home: const HomeScreen(),
       routes: featureRegistry.routes,

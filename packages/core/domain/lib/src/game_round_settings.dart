@@ -1,10 +1,4 @@
 class GameRoundSettings {
-  final int playerCount;
-  final int spyCount;
-  final Duration gameTime;
-  final String theme;
-  final String word;
-
   GameRoundSettings({
     required this.playerCount,
     required this.spyCount,
@@ -12,4 +6,10 @@ class GameRoundSettings {
     required this.theme,
     required this.word,
   });
+
+  final int playerCount;
+  final int spyCount;
+  final Duration gameTime;
+  final String theme;
+  final String word;
 }
